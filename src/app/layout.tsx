@@ -7,29 +7,31 @@ import Footer from "@/components/Footer/Footer";
 const inter = Inter({
   variable: "--font-geist-sans",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800"],
+  weight: ["300", "400", "500", "600", "700", "800", "900"],
 });
 
 export const metadata: Metadata = {
-  title: "LWP & Vihang | Learning With PKM",
+  title: "LWP | EdTech Platform Powered by Aprasak",
   description:
-    "Explore educational content in Mathematics (Ganit), Finance, Sanskrit, and Hindi. Created by PKM (Pradeep Kumar Misra) — empowering learners through high-quality YouTube content.",
+    "India's fastest-growing EdTech platform. Explore world-class educational content in Mathematics, Finance, Sanskrit, and Hindi. Powered by Aprasak — empowering learners through high-quality content.",
   keywords: [
     "LWP",
+
     "Learning With PKM",
-    "Vihang",
+    "Aprasak",
+    "EdTech",
     "Mathematics",
     "Ganit",
     "Finance",
     "Sanskrit",
     "Hindi",
     "Education",
-    "YouTube",
+    "Online Learning",
   ],
   openGraph: {
-    title: "LWP & Vihang | Learning With PKM",
+    title: "LWP | EdTech Platform Powered by Aprasak",
     description:
-      "Explore educational content in Mathematics, Finance, Sanskrit, and Hindi.",
+      "India's fastest-growing EdTech platform. World-class content in Mathematics, Finance, Sanskrit, and Hindi.",
     type: "website",
     url: "https://www.youtube.com/@learningwithpkm-vihang",
   },
@@ -43,11 +45,26 @@ export default function RootLayout({
   return (
     <html lang="en" className={inter.variable}>
       <body>
+        {/* Announcement Bar */}
+        <div className="announcement-bar">
+          <span className="separator" />
+          <span>
+            🚀 <strong>LWP</strong> — India&apos;s Premier EdTech Platform
+          </span>
+          <span className="separator" />
+          <span>
+            Powered by <strong>Aprasak</strong>
+          </span>
+          <span className="separator" />
+        </div>
+
         {/* Background decorations */}
         <div className="bg-grid" />
+        <div className="bg-noise" />
         <div className="bg-orb bg-orb-1" />
         <div className="bg-orb bg-orb-2" />
         <div className="bg-orb bg-orb-3" />
+        <div className="bg-orb bg-orb-4" />
 
         <Navbar />
         <main style={{ position: "relative", zIndex: 1 }}>{children}</main>

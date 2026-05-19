@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import SkeletonPage from "@/components/SkeletonPage/SkeletonPage";
 
 export const metadata: Metadata = {
-  title: "Hindi | LWP & Vihang",
+  title: "Hindi | LWP",
   description:
-    "Explore Hindi poetry, literature, and language arts with LWP & Vihang.",
+    "Explore Hindi poetry, literature, and language arts with LWP.",
 };
 
 const sections = [
