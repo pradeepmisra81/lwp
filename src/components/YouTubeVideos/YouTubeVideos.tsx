@@ -12,7 +12,7 @@ interface Video {
   isShort: boolean;
 }
 
-const CHANNEL_URL = "https://www.youtube.com/@learningwithpkm-vihang";
+import { YOUTUBE_CHANNELS } from "@/config/constants";
 
 const CATEGORY_MAP: Record<string, { label: string; color: string }> = {
   "ganit": { label: "📐 Ganit", color: "#f97316" },
@@ -238,7 +238,7 @@ export default function YouTubeVideos() {
             </p>
           </div>
           <a
-            href={CHANNEL_URL}
+            href={YOUTUBE_CHANNELS.main.url}
             target="_blank"
             rel="noopener noreferrer"
             className="group inline-flex items-center gap-2 py-2.5 px-5 text-primary-400 text-sm font-bold no-underline border border-[rgba(249,115,22,0.2)] rounded-xl transition-all duration-300 hover:bg-[rgba(249,115,22,0.08)] hover:border-primary-400 hover:shadow-[0_0_20px_rgba(249,115,22,0.1)]"
@@ -309,7 +309,7 @@ export default function YouTubeVideos() {
               </p>
             </div>
             <a
-              href={CHANNEL_URL}
+              href={YOUTUBE_CHANNELS.main.url}
               target="_blank"
               rel="noopener noreferrer"
               className="group inline-flex items-center gap-2 ml-auto max-[768px]:ml-0 py-3.5 px-7 bg-gradient-to-br from-[#ff0000] to-[#cc0000] text-white rounded-2xl text-sm font-bold no-underline transition-all duration-300 shadow-[0_4px_24px_rgba(255,0,0,0.2)] whitespace-nowrap hover:-translate-y-[2px] hover:shadow-[0_8px_40px_rgba(255,0,0,0.35)]"

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import GanitVideos from "./GanitVideos";
+import { YOUTUBE_CHANNELS } from "@/config/constants";
 
 export const metadata: Metadata = {
   title: "Ganit in LWP | Mathematics Education",
@@ -40,7 +41,7 @@ const sections = [
   },
 ];
 
-const GANIT_CHANNEL_URL = "https://www.youtube.com/@%E0%A4%97%E0%A4%A3%E0%A4%BF%E0%A4%A4inLWP";
+
 
 export default function GanitPage() {
   return (
@@ -64,7 +65,7 @@ export default function GanitPage() {
           </p>
           <div className="flex justify-center gap-3 animate-[fadeInUp_0.6s_ease_0.3s_both]">
             <a
-              href={GANIT_CHANNEL_URL}
+              href={YOUTUBE_CHANNELS.ganit.url}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 py-3 px-6 bg-gradient-to-br from-primary-500 to-primary-600 text-white rounded-2xl text-sm font-bold no-underline transition-all duration-300 shadow-[0_4px_24px_rgba(249,115,22,0.25)] hover:-translate-y-[2px] hover:shadow-[0_8px_32px_rgba(249,115,22,0.35)]"
@@ -83,7 +84,7 @@ export default function GanitPage() {
       </section>
 
       {/* Videos from the Ganit channel */}
-      <GanitVideos channelUrl={GANIT_CHANNEL_URL} />
+      <GanitVideos channelUrl={YOUTUBE_CHANNELS.ganit.url} />
 
       {/* Topics Grid */}
       <section className="py-12 pb-20">

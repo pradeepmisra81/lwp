@@ -1,8 +1,9 @@
 import { NextResponse } from "next/server";
+import { YOUTUBE_CHANNELS } from "@/config/constants";
 
 export async function GET() {
   try {
-    const res = await fetch("https://www.youtube.com/feeds/videos.xml?channel_id=UCi44-1n0jIeh9R7JmENmHCg", {
+    const res = await fetch(`https://www.youtube.com/feeds/videos.xml?channel_id=${YOUTUBE_CHANNELS.main.id}`, {
       next: { revalidate: 3600 }, // Cache for 1 hour
     });
     

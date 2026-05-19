@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 
-const CHANNEL_URL = "https://www.youtube.com/@learningwithpkm-vihang";
+import { YOUTUBE_CHANNELS } from "@/config/constants";
 
 const stats = [
   { value: 100, suffix: "+", label: "Videos", icon: "🎬" },
@@ -109,7 +109,7 @@ export default function HeroSection() {
           {/* CTAs */}
           <div className="flex gap-4 flex-wrap max-[480px]:flex-col">
             <a
-              href={CHANNEL_URL}
+              href={YOUTUBE_CHANNELS.main.url}
               target="_blank"
               rel="noopener noreferrer"
               className="group inline-flex items-center justify-center gap-2.5 py-3.5 px-7 bg-gradient-to-br from-[#ff0000] to-[#cc0000] text-white rounded-2xl text-base font-bold no-underline transition-all duration-300 shadow-[0_4px_24px_rgba(255,0,0,0.25)] hover:-translate-y-[2px] hover:shadow-[0_8px_40px_rgba(255,0,0,0.35)]"

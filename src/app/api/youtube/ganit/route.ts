@@ -1,11 +1,12 @@
 import { NextResponse } from "next/server";
+import { YOUTUBE_CHANNELS } from "@/config/constants";
 
-const GANIT_CHANNEL_ID = "UC4lyYDmzrVj7mN8J9tUy4zw";
+
 
 export async function GET() {
   try {
     const res = await fetch(
-      `https://www.youtube.com/feeds/videos.xml?channel_id=${GANIT_CHANNEL_ID}`,
+      `https://www.youtube.com/feeds/videos.xml?channel_id=${YOUTUBE_CHANNELS.ganit.id}`,
       { next: { revalidate: 3600 } }
     );
 
