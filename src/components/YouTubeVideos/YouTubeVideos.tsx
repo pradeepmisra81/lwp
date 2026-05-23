@@ -12,7 +12,7 @@ interface Video {
   isShort: boolean;
 }
 
-const CHANNEL_URL = "https://www.youtube.com/@learningwithpkm-vihang";
+import { YOUTUBE_CHANNELS } from "@/config/constants";
 
 const CATEGORY_MAP: Record<string, { label: string; color: string }> = {
   "ganit": { label: "📐 Ganit", color: "#f97316" },
@@ -40,7 +40,25 @@ function getCategoryTag(title: string): { label: string; color: string } | null 
   return null;
 }
 
-// Carousel Component to handle horizontal scrolling
+/* Shimmer loading skeleton */
+function VideoSkeleton({ isShort = false }: { isShort?: boolean }) {
+  return (
+    <div className={`flex flex-col flex-none snap-start rounded-2xl overflow-hidden border border-[rgba(255,255,255,0.04)] bg-[rgba(255,255,255,0.02)] ${isShort ? "w-[240px]" : "w-[340px]"}`}>
+      <div className={`relative overflow-hidden bg-[rgba(255,255,255,0.03)] ${isShort ? "aspect-[9/16]" : "aspect-video"}`}>
+        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[rgba(255,255,255,0.04)] to-transparent animate-[shimmer_2s_ease_infinite] bg-[length:200%_100%]" />
+      </div>
+      <div className="p-4 flex flex-col gap-3">
+        <div className="h-4 w-full rounded bg-[rgba(255,255,255,0.04)] relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[rgba(255,255,255,0.04)] to-transparent animate-[shimmer_2s_ease_infinite] bg-[length:200%_100%]" />
+        </div>
+        <div className="h-3 w-2/3 rounded bg-[rgba(255,255,255,0.03)] relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[rgba(255,255,255,0.04)] to-transparent animate-[shimmer_2s_ease_infinite_0.3s] bg-[length:200%_100%]" />
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function VideoCarousel({ videos, title, subtitle, icon }: { videos: Video[], title: string, subtitle: string, icon: string }) {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
@@ -77,20 +95,20 @@ function VideoCarousel({ videos, title, subtitle, icon }: { videos: Video[], tit
   if (!videos || videos.length === 0) return null;
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-5">
       <div className="flex flex-col gap-1">
-        <span className="text-lg font-semibold text-text-primary flex items-center gap-2">{icon} {title}</span>
+        <span className="text-xl font-bold text-text-primary flex items-center gap-2.5 tracking-[-0.01em]">{icon} {title}</span>
         <p className="text-sm text-text-muted">{subtitle}</p>
       </div>
 
       <div className="relative">
         {canScrollLeft && (
           <button
-            className="absolute top-[40%] -translate-y-1/2 z-10 w-[44px] h-[44px] rounded-full bg-[rgba(17,17,40,0.9)] border border-border-light text-text-primary flex items-center justify-center cursor-pointer transition-all duration-150 backdrop-blur-[12px] shadow-lg hover:bg-[rgba(249,115,22,0.2)] hover:border-primary-400 max-[768px]:hidden left-[-22px]"
+            className="absolute top-[40%] -translate-y-1/2 z-10 w-[48px] h-[48px] rounded-2xl bg-[rgba(6,6,18,0.92)] border border-[rgba(255,255,255,0.08)] text-text-primary flex items-center justify-center cursor-pointer transition-all duration-300 backdrop-blur-[16px] shadow-xl hover:bg-[rgba(249,115,22,0.15)] hover:border-primary-400 hover:shadow-[0_0_20px_rgba(249,115,22,0.15)] max-[768px]:hidden left-[-24px]"
             onClick={() => scroll("left")}
             aria-label="Scroll left"
           >
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
               <path d="M15 18l-6-6 6-6" />
             </svg>
           </button>
@@ -107,33 +125,36 @@ function VideoCarousel({ videos, title, subtitle, icon }: { videos: Video[], tit
                 href={video.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`flex flex-col flex-none snap-start bg-bg-glass border border-border-subtle rounded-lg overflow-hidden no-underline transition-all duration-[250ms] animate-[fadeInUp_0.6s_ease_both] group hover:border-border-light hover:-translate-y-1.5 hover:shadow-xl ${isShort ? 'w-[240px] max-[768px]:w-[200px]' : 'w-[340px] max-[768px]:w-[300px]'}`}
+                className={`group flex flex-col flex-none snap-start rounded-2xl overflow-hidden no-underline transition-all duration-500 border border-[rgba(255,255,255,0.05)] bg-[rgba(255,255,255,0.02)] hover:border-[rgba(255,255,255,0.1)] hover:-translate-y-2 hover:shadow-[0_20px_60px_-15px_rgba(0,0,0,0.5)] ${isShort ? "w-[240px] max-[768px]:w-[200px]" : "w-[340px] max-[768px]:w-[300px]"}`}
                 style={{ animationDelay: `${idx * 0.1}s` }}
               >
                 {/* Thumbnail */}
-                <div className={`relative overflow-hidden bg-[#111] ${isShort ? 'aspect-[9/16]' : 'aspect-video'}`}>
+                <div className={`relative overflow-hidden bg-[#0a0a0a] ${isShort ? "aspect-[9/16]" : "aspect-video"}`}>
                   <img 
                     src={video.thumbnail} 
                     alt={video.title} 
-                    className="w-full h-full object-cover transition-transform duration-[400ms] group-hover:scale-105"
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                     loading="lazy"
                   />
-                  <div className="absolute inset-0 flex items-center justify-center bg-[rgba(0,0,0,0.2)] transition-colors duration-[250ms] group-hover:bg-[rgba(0,0,0,0.1)]">
-                    <svg className="opacity-80 transition-all duration-[250ms] drop-shadow-[0_2px_8px_rgba(0,0,0,0.4)] group-hover:scale-[1.2] group-hover:opacity-100" viewBox="0 0 24 24" fill="white" width="48" height="48">
-                      <path d="M8 5v14l11-7z" />
-                    </svg>
+                  {/* Hover overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-[rgba(0,0,0,0.6)] via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  {/* Play button */}
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="w-14 h-14 rounded-full bg-[rgba(255,255,255,0.15)] backdrop-blur-[4px] flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500 scale-75 group-hover:scale-100">
+                      <svg viewBox="0 0 24 24" fill="white" width="28" height="28">
+                        <path d="M8 5v14l11-7z" />
+                      </svg>
+                    </div>
                   </div>
-                  <div className="absolute bottom-2 right-2 flex items-center gap-1 px-2 py-[2px] bg-[rgba(0,0,0,0.75)] rounded-sm text-[11px] text-white font-medium">
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <circle cx="12" cy="12" r="10" />
-                      <path d="M12 6v6l4 2" />
-                    </svg>
-                    {isShort ? "Short" : "Video"}
+                  {/* Duration badge */}
+                  <div className="absolute bottom-2 right-2 flex items-center gap-1 px-2.5 py-1 bg-[rgba(0,0,0,0.8)] backdrop-blur-[4px] rounded-lg text-[11px] text-white font-semibold">
+                    {isShort ? "⚡ Short" : "▶ Video"}
                   </div>
+                  {/* Category tag */}
                   {category && (
                     <span
-                      className="absolute top-2 left-2 px-[10px] py-[2px] rounded-full text-[11px] text-white font-semibold tracking-[0.02em]"
-                      style={{ background: category.color }}
+                      className="absolute top-2.5 left-2.5 px-3 py-1 rounded-lg text-[11px] text-white font-bold tracking-[0.02em] backdrop-blur-[4px]"
+                      style={{ background: `${category.color}dd` }}
                     >
                       {category.label}
                     </span>
@@ -141,12 +162,12 @@ function VideoCarousel({ videos, title, subtitle, icon }: { videos: Video[], tit
                 </div>
 
                 {/* Info */}
-                <div className="p-4 flex flex-col gap-2 flex-grow">
-                  <h3 className="text-sm font-semibold text-text-primary leading-[1.4] line-clamp-2">{video.title}</h3>
-                  <div className="flex items-center gap-2 text-xs text-text-muted mt-auto pt-2">
-                    <span className="text-text-secondary font-medium">LWP & Vihang</span>
-                    <span className="opacity-50">•</span>
-                    <span className="">
+                <div className="p-5 flex flex-col gap-2.5 flex-grow">
+                  <h3 className="text-sm font-bold text-text-primary leading-[1.5] line-clamp-2 tracking-[-0.01em]">{video.title}</h3>
+                  <div className="flex items-center gap-2 text-xs text-text-muted mt-auto pt-1">
+                    <span className="text-text-secondary font-semibold">LWP & Vihang</span>
+                    <span className="opacity-30">•</span>
+                    <span>
                       {new Date(video.publishedAt).toLocaleDateString("en-IN", {
                         day: "numeric",
                         month: "short",
@@ -162,11 +183,11 @@ function VideoCarousel({ videos, title, subtitle, icon }: { videos: Video[], tit
 
         {canScrollRight && (
           <button
-            className="absolute top-[40%] -translate-y-1/2 z-10 w-[44px] h-[44px] rounded-full bg-[rgba(17,17,40,0.9)] border border-border-light text-text-primary flex items-center justify-center cursor-pointer transition-all duration-150 backdrop-blur-[12px] shadow-lg hover:bg-[rgba(249,115,22,0.2)] hover:border-primary-400 max-[768px]:hidden right-[-22px]"
+            className="absolute top-[40%] -translate-y-1/2 z-10 w-[48px] h-[48px] rounded-2xl bg-[rgba(6,6,18,0.92)] border border-[rgba(255,255,255,0.08)] text-text-primary flex items-center justify-center cursor-pointer transition-all duration-300 backdrop-blur-[16px] shadow-xl hover:bg-[rgba(249,115,22,0.15)] hover:border-primary-400 hover:shadow-[0_0_20px_rgba(249,115,22,0.15)] max-[768px]:hidden right-[-24px]"
             onClick={() => scroll("right")}
             aria-label="Scroll right"
           >
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
               <path d="M9 18l6-6-6-6" />
             </svg>
           </button>
@@ -203,37 +224,55 @@ export default function YouTubeVideos() {
     <section className="py-20 pb-12" id="latest-videos">
       <div className="max-w-[1280px] mx-auto px-6">
         {/* Section Header */}
-        <div className="flex justify-between items-end mb-10 gap-6 flex-wrap max-[768px]:flex-col max-[768px]:items-start">
-          <div className="flex flex-col gap-2">
-            <span className="inline-flex items-center gap-2 py-1 px-3 bg-[rgba(249,115,22,0.1)] border border-[rgba(249,115,22,0.2)] rounded-full text-xs font-semibold text-primary-400 w-fit uppercase tracking-[0.05em]">🎬 Latest Content</span>
-            <h2 className="text-3xl max-[768px]:text-2xl font-bold text-text-primary tracking-[-0.02em]">
+        <div className="flex justify-between items-end mb-12 gap-6 flex-wrap max-[768px]:flex-col max-[768px]:items-start">
+          <div className="flex flex-col gap-3">
+            <span className="section-badge bg-[rgba(249,115,22,0.08)] border-[rgba(249,115,22,0.15)] text-primary-400 w-fit">
+              🎬 Latest Content
+            </span>
+            <h2 className="section-title">
               Latest from{" "}
-              <span className="bg-gradient-to-br from-primary-400 to-accent-400 bg-clip-text text-transparent">LWP & Vihang</span>
+              <span className="bg-gradient-to-r from-primary-400 to-accent-400 bg-clip-text text-transparent">LWP</span>
             </h2>
-            <p className="text-base text-text-muted max-w-[500px]">
+            <p className="section-subtitle">
               Catch up on our most recent educational videos across all subjects
             </p>
           </div>
           <a
-            href={CHANNEL_URL}
+            href={YOUTUBE_CHANNELS.main.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 py-2 px-4 text-primary-400 text-sm font-semibold no-underline border border-[rgba(249,115,22,0.3)] rounded-full transition-all duration-150 hover:bg-[rgba(249,115,22,0.1)] hover:border-primary-400 hover:translate-x-1"
+            className="group inline-flex items-center gap-2 py-2.5 px-5 text-primary-400 text-sm font-bold no-underline border border-[rgba(249,115,22,0.2)] rounded-xl transition-all duration-300 hover:bg-[rgba(249,115,22,0.08)] hover:border-primary-400 hover:shadow-[0_0_20px_rgba(249,115,22,0.1)]"
           >
             Visit Channel
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="transition-transform duration-300 group-hover:translate-x-1">
               <path d="M5 12h14M12 5l7 7-7 7" />
             </svg>
           </a>
         </div>
 
         {isLoading ? (
-          <div className="flex flex-col items-center justify-center py-12 gap-4 text-text-muted">
-            <div className="w-10 h-10 border-[3px] border-[rgba(249,115,22,0.2)] border-t-primary-500 rounded-full animate-[spin_1s_linear_infinite]" />
-            <p>Loading latest videos...</p>
+          <div className="flex flex-col gap-12">
+            <div className="flex flex-col gap-5">
+              <div className="flex flex-col gap-1">
+                <div className="h-5 w-40 rounded bg-[rgba(255,255,255,0.04)]" />
+                <div className="h-3 w-60 rounded bg-[rgba(255,255,255,0.03)] mt-1" />
+              </div>
+              <div className="flex gap-5 overflow-hidden">
+                {[...Array(4)].map((_, i) => <VideoSkeleton key={i} />)}
+              </div>
+            </div>
+            <div className="flex flex-col gap-5">
+              <div className="flex flex-col gap-1">
+                <div className="h-5 w-40 rounded bg-[rgba(255,255,255,0.04)]" />
+                <div className="h-3 w-60 rounded bg-[rgba(255,255,255,0.03)] mt-1" />
+              </div>
+              <div className="flex gap-5 overflow-hidden">
+                {[...Array(5)].map((_, i) => <VideoSkeleton key={i} isShort />)}
+              </div>
+            </div>
           </div>
         ) : (
-          <div className="flex flex-col gap-12">
+          <div className="flex flex-col gap-14">
             <VideoCarousel 
               videos={videos} 
               title="Recent Videos" 
@@ -250,30 +289,33 @@ export default function YouTubeVideos() {
         )}
 
         {/* Channel CTA */}
-        <div className="relative mt-12 rounded-xl overflow-hidden bg-gradient-to-br from-[rgba(255,0,0,0.08)] to-[rgba(249,115,22,0.08)] border border-[rgba(255,0,0,0.15)]">
-          <div className="absolute -top-[50%] -right-[20%] w-[400px] h-[400px] bg-[radial-gradient(circle,rgba(255,0,0,0.08),transparent_70%)] pointer-events-none" />
+        <div className="relative mt-14 rounded-2xl overflow-hidden border border-[rgba(255,0,0,0.1)]">
+          {/* Background effects */}
+          <div className="absolute inset-0 bg-gradient-to-br from-[rgba(255,0,0,0.06)] via-transparent to-[rgba(249,115,22,0.06)]" />
+          <div className="absolute -top-[50%] -right-[20%] w-[400px] h-[400px] bg-[radial-gradient(circle,rgba(255,0,0,0.06),transparent_70%)] pointer-events-none" />
+
           <div className="relative flex items-center gap-6 py-8 px-8 flex-wrap max-[768px]:flex-col max-[768px]:text-center max-[768px]:p-6">
-            <div className="flex items-center justify-center w-[60px] h-[60px] bg-gradient-to-br from-[#ff0000] to-[#cc0000] rounded-lg shrink-0 shadow-[0_0_30px_rgba(255,0,0,0.2)]">
+            <div className="flex items-center justify-center w-[64px] h-[64px] bg-gradient-to-br from-[#ff0000] to-[#cc0000] rounded-2xl shrink-0 shadow-[0_0_40px_rgba(255,0,0,0.2)] transition-transform duration-500 hover:scale-110">
               <svg viewBox="0 0 24 24" fill="white" width="32" height="32">
                 <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
               </svg>
             </div>
-            <div>
-              <h3 className="text-xl font-bold text-text-primary mb-1">
-                Subscribe to LWP & Vihang
+            <div className="flex-grow">
+              <h3 className="text-xl font-extrabold text-text-primary mb-1 tracking-[-0.02em]">
+                Subscribe to LWP &amp; Vihang
               </h3>
               <p className="text-sm text-text-muted">
-                Join our community of learners and never miss an educational video
+                Join our community of 10,000+ learners and never miss an educational video
               </p>
             </div>
             <a
-              href={CHANNEL_URL}
+              href={YOUTUBE_CHANNELS.main.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 ml-auto max-[768px]:ml-0 py-3 px-6 bg-gradient-to-br from-[#ff0000] to-[#cc0000] text-white rounded-full text-sm font-semibold no-underline transition-all duration-150 shadow-[0_4px_20px_rgba(255,0,0,0.2)] whitespace-nowrap hover:-translate-y-[2px] hover:shadow-[0_6px_30px_rgba(255,0,0,0.35)]"
+              className="group inline-flex items-center gap-2 ml-auto max-[768px]:ml-0 py-3.5 px-7 bg-gradient-to-br from-[#ff0000] to-[#cc0000] text-white rounded-2xl text-sm font-bold no-underline transition-all duration-300 shadow-[0_4px_24px_rgba(255,0,0,0.2)] whitespace-nowrap hover:-translate-y-[2px] hover:shadow-[0_8px_40px_rgba(255,0,0,0.35)]"
             >
               Visit Channel
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-0.5">
                 <path d="M7 17L17 7M7 7h10v10" />
               </svg>
             </a>

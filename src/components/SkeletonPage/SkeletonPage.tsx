@@ -6,6 +6,8 @@ interface SkeletonPageProps {
   sections: { title: string; description: string }[];
 }
 
+import { YOUTUBE_CHANNELS } from "@/config/constants";
+
 export default function SkeletonPage({
   emoji,
   title,
@@ -68,7 +70,7 @@ export default function SkeletonPage({
           <div className="text-center flex flex-col items-center gap-4">
             <p className="text-base text-text-muted">Meanwhile, check out our videos on YouTube!</p>
             <a
-              href="https://www.youtube.com/@learningwithpkm-vihang"
+              href={YOUTUBE_CHANNELS.main.url}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 py-3 px-6 text-white rounded-full text-base font-semibold transition-all duration-150 shadow-[0_4px_20px_rgba(0,0,0,0.2)] hover:-translate-y-[2px] hover:shadow-[0_8px_30px_rgba(0,0,0,0.3)]"

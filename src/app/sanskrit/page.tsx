@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import SkeletonPage from "@/components/SkeletonPage/SkeletonPage";
 
 export const metadata: Metadata = {
-  title: "Sanskrit | LWP & Vihang",
+  title: "Sanskrit | LWP",
   description:
     "Discover the beauty of Sanskrit — shlokas, grammar, literature, and cultural heritage with LWP.",
 };
