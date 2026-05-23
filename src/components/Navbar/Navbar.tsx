@@ -10,6 +10,7 @@ const navLinks = [
   { href: "/finance", label: "Finance in LWP", emoji: "💰" },
   { href: "/sanskrit", label: "Sanskrit", emoji: "📜" },
   { href: "/hindi", label: "Hindi", emoji: "✍️" },
+  { href: "/payment", label: "Payment", emoji: "💳" },
 ];
 
 export default function Navbar() {
