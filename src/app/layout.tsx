@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar/Navbar";
 import Footer from "@/components/Footer/Footer";
+import ScrollProgressBar from "@/components/ScrollProgressBar";
 
 const inter = Inter({
   variable: "--font-geist-sans",
@@ -45,18 +46,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={inter.variable}>
       <body>
-        {/* Announcement Bar */}
-        <div className="announcement-bar">
-          <span className="separator" />
-          <span>
-            🚀 <strong>LWP</strong> — India&apos;s Premier EdTech Platform
-          </span>
-          <span className="separator" />
-          <span>
-            Powered by <strong>Aprasak</strong>
-          </span>
-          <span className="separator" />
-        </div>
+        <ScrollProgressBar />
 
         {/* Background decorations */}
         <div className="bg-grid" />

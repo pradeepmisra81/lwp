@@ -24,14 +24,44 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useEffect(() => {
+    if (mobileOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [mobileOpen]);
+
   return (
     <header
-      className={`fixed top-[33px] left-0 right-0 z-[100] transition-all duration-500 ${
+      className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-300 ${
         scrolled
           ? "bg-[rgba(6,6,18,0.92)] backdrop-blur-[24px] border-b border-[rgba(255,255,255,0.06)] shadow-[0_4px_30px_rgba(0,0,0,0.3)]"
           : "bg-[rgba(6,6,18,0.6)] backdrop-blur-[12px] border-b border-transparent"
       }`}
     >
+      {/* Announcement Bar */}
+      <div 
+        className={`announcement-bar transition-all duration-300 ${
+          scrolled 
+            ? "max-h-0 py-0 opacity-0 border-none pointer-events-none" 
+            : "max-h-[80px] py-2 opacity-100"
+        }`}
+      >
+        <span className="separator" />
+        <span>
+          🚀 <strong>LWP</strong> — India&apos;s Premier EdTech Platform
+        </span>
+        <span className="separator" />
+        <span>
+          Powered by <strong>Aprasak</strong>
+        </span>
+        <span className="separator" />
+      </div>
+
       <nav className="max-w-[1280px] mx-auto px-4 sm:px-6 flex items-center justify-between h-[72px] gap-4">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-3 no-underline shrink-0 group">
@@ -113,7 +143,7 @@ export default function Navbar() {
 
         {/* Mobile Menu */}
         <div
-          className={`fixed top-[105px] left-0 right-0 bottom-0 bg-[rgba(6,6,18,0.98)] backdrop-blur-[24px] py-8 px-6 z-[99] flex flex-col gap-6 transition-all duration-500 ${
+          className={`absolute top-full left-0 right-0 h-[calc(100dvh-100%)] overflow-y-auto bg-[rgba(6,6,18,0.98)] backdrop-blur-[24px] py-8 px-6 z-[99] flex flex-col gap-6 min-[900px]:hidden transition-all duration-500 ${
             mobileOpen
               ? "opacity-100 translate-y-0 pointer-events-auto"
               : "opacity-0 -translate-y-4 pointer-events-none"
