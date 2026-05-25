@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar/Navbar";
 import Footer from "@/components/Footer/Footer";
+import ScrollProgressBar from "@/components/ScrollProgressBar";
 
 const inter = Inter({
   variable: "--font-geist-sans",
@@ -13,13 +14,18 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "LWP | EdTech Platform Powered by Aprasak",
   description:
-    "India's fastest-growing EdTech platform. Explore world-class educational content in Mathematics, Finance, Sanskrit, and Hindi. Powered by Aprasak — empowering learners through high-quality content.",
+    "India's fastest-growing EdTech platform. Explore world-class educational content in Technology, Software Development, AI & ML, Blockchain, Mathematics, Finance, Sanskrit, and Hindi. Powered by Aprasak — empowering learners through high-quality content.",
   keywords: [
     "LWP",
-
     "Learning With PKM",
     "Aprasak",
     "EdTech",
+    "Technology",
+    "Software Development",
+    "AI & ML",
+    "AI",
+    "ML",
+    "Blockchain",
     "Mathematics",
     "Ganit",
     "Finance",
@@ -31,7 +37,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "LWP | EdTech Platform Powered by Aprasak",
     description:
-      "India's fastest-growing EdTech platform. World-class content in Mathematics, Finance, Sanskrit, and Hindi.",
+      "India's fastest-growing EdTech platform. World-class content in Technology, Software Development, AI & ML, Blockchain, Mathematics, Finance, Sanskrit, and Hindi.",
     type: "website",
     url: "https://www.youtube.com/@learningwithpkm-vihang",
   },
@@ -45,18 +51,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={inter.variable}>
       <body>
-        {/* Announcement Bar */}
-        <div className="announcement-bar">
-          <span className="separator" />
-          <span>
-            🚀 <strong>LWP</strong> — India&apos;s Premier EdTech Platform
-          </span>
-          <span className="separator" />
-          <span>
-            Powered by <strong>Aprasak</strong>
-          </span>
-          <span className="separator" />
-        </div>
+        <ScrollProgressBar />
 
         {/* Background decorations */}
         <div className="bg-grid" />

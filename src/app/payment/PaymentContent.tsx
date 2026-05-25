@@ -75,8 +75,25 @@ export default function PaymentContent() {
               <div className="absolute inset-0 rounded-2xl border border-[rgba(249,115,22,0.25)] pointer-events-none transition-all duration-300 group-hover/qr:border-primary-500" />
             </div>
 
-            <p className="text-xs text-text-muted max-w-[280px] leading-relaxed">
+            {/* Mobile/Tablet UPI Deep Link Button */}
+            <div className="w-full md:hidden flex flex-col gap-2">
+              <a
+                href="upi://pay?pa=Lwp@kotak&pn=PRADEEP%20KUMAR%20MISRA&tn=Support%20LWP"
+                className="flex items-center justify-center gap-2.5 w-full py-3.5 px-6 rounded-xl font-extrabold text-sm text-white bg-gradient-to-r from-primary-500 via-primary-600 to-accent-600 transition-all duration-300 shadow-[0_4px_20px_rgba(249,115,22,0.25)] hover:shadow-[0_8px_30px_rgba(249,115,22,0.4)] active:scale-[0.98] border border-[rgba(255,255,255,0.1)]"
+              >
+                <span className="text-base">⚡</span> Pay via UPI App
+              </a>
+              <span className="text-[10px] text-text-muted">
+                Tap to open GPay, PhonePe, Paytm, BHIM, etc.
+              </span>
+            </div>
+
+            <p className="text-xs text-text-muted max-w-[280px] leading-relaxed hidden md:block">
               Use any UPI App (GPay, PhonePe, Paytm, BHIM, etc.) to scan the QR code above.
+            </p>
+
+            <p className="text-xs text-text-muted max-w-[280px] leading-relaxed md:hidden">
+              Scan the QR code or tap the button above to pay with your preferred UPI app.
             </p>
 
             <div className="w-full h-[1px] bg-border-subtle my-2" />

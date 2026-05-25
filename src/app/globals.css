@@ -631,3 +631,60 @@ ul, ol {
     font-size: var(--text-2xl);
   }
 }
+
+/* Premium play button hover effect with rotating gradient outline */
+.play-btn-glow {
+  position: relative;
+  width: 3.5rem; /* w-14 */
+  height: 3.5rem; /* h-14 */
+  border-radius: 9999px; /* rounded-full */
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+}
+
+/* Rotating gradient border on hover */
+.play-btn-glow::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 0deg,
+    transparent 20%,
+    var(--primary-500) 40%,
+    var(--accent-500) 60%,
+    transparent 80%
+  );
+  animation: spinSlow 3s linear infinite;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  z-index: -1;
+}
+
+/* Innermost shape to mask the gradient and keep the button dark/glassy */
+.play-btn-glow::after {
+  content: '';
+  position: absolute;
+  inset: 1px;
+  border-radius: 50%;
+  background: rgba(6, 6, 18, 0.75);
+  z-index: -1;
+  transition: background 0.3s ease;
+}
+
+.group:hover .play-btn-glow::before {
+  opacity: 1;
+}
+
+.group:hover .play-btn-glow {
+  transform: scale(1.1);
+  box-shadow: 0 0 25px rgba(249, 115, 22, 0.4);
+  background: transparent;
+}
+

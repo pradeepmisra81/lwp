@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import SkeletonPage from "@/components/SkeletonPage/SkeletonPage";
+import SubjectPageContent from "@/components/Subjects/SubjectPageContent";
+import { YOUTUBE_CHANNELS } from "@/config/constants";
 
 export const metadata: Metadata = {
   title: "Finance in LWP | Financial Education",
@@ -42,12 +43,19 @@ const sections = [
 
 export default function FinancePage() {
   return (
-    <SkeletonPage
+    <SubjectPageContent
       emoji="💰"
       title="Finance in LWP"
       subtitle="Build financial literacy and learn smart money management. From stock markets to personal budgeting — empowering you to make informed financial decisions."
       accentColor="linear-gradient(135deg, #22c55e, #16a34a)"
+      glowColor="rgba(34, 197, 94, 0.12)"
+      borderColor="rgba(34, 197, 94, 0.2)"
+      borderHex="#22c55e"
       sections={sections}
+      keywords={["finance", "mutual", "stock"]}
+      channelUrl={YOUTUBE_CHANNELS.main.url}
+      subjectLabel="Finance"
+      subjectKey="finance"
     />
   );
 }

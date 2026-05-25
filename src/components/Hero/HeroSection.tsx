@@ -6,7 +6,7 @@ import { YOUTUBE_CHANNELS } from "@/config/constants";
 
 const stats = [
   { value: 100, suffix: "+", label: "Videos", icon: "🎬" },
-  { value: 4, suffix: "+", label: "Subjects", icon: "📚" },
+  { value: 8, suffix: "+", label: "Subjects", icon: "📚" },
   { value: 10, suffix: "K+", label: "Learners", icon: "👥" },
   { value: 100, suffix: "%", label: "Free", icon: "💎" },
 ];
@@ -101,6 +101,8 @@ export default function HeroSection() {
           {/* Subtext */}
           <p className="text-lg text-text-secondary leading-[1.8] max-w-[540px] [&>strong]:text-text-primary [&>strong]:font-semibold">
             India&apos;s premier EdTech platform delivering world-class content in{" "}
+            <strong>Technology</strong>, <strong>Software Development</strong>,{" "}
+            <strong>AI & ML</strong>, <strong>Blockchain</strong>,{" "}
             <strong>Mathematics</strong>, <strong>Finance</strong>,{" "}
             <strong>Sanskrit</strong>, <strong>Hindi</strong>, and beyond.
             Join our growing community of passionate learners.
@@ -165,12 +167,19 @@ export default function HeroSection() {
                 <div className="absolute inset-0 rounded-full border-2 border-[rgba(255,0,0,0.3)] animate-[breathe_3s_ease-in-out_infinite]" />
               </div>
 
-              <h3 className="text-2xl font-extrabold text-text-primary tracking-[-0.02em]">LWP</h3>
+              <div className="flex items-center gap-2.5">
+                <img src="/logo.png" alt="LWP Logo" className="w-7 h-7 rounded-lg object-cover" />
+                <h3 className="text-2xl font-extrabold text-text-primary tracking-[-0.02em]">LWP</h3>
+              </div>
               <p className="text-sm text-text-muted font-medium">EdTech Platform</p>
 
               {/* Subject tags */}
               <div className="flex flex-wrap gap-2 justify-center mt-1">
                 {[
+                  { emoji: "💻", label: "Technology", color: "rgba(14,165,233,0.12)", border: "rgba(14,165,233,0.2)" },
+                  { emoji: "⚙️", label: "Software Dev", color: "rgba(59,130,246,0.12)", border: "rgba(59,130,246,0.2)" },
+                  { emoji: "🤖", label: "AI & ML", color: "rgba(236,72,153,0.12)", border: "rgba(236,72,153,0.2)" },
+                  { emoji: "🔗", label: "Blockchain", color: "rgba(168,85,247,0.12)", border: "rgba(168,85,247,0.2)" },
                   { emoji: "📐", label: "Math", color: "rgba(249,115,22,0.12)", border: "rgba(249,115,22,0.2)" },
                   { emoji: "💰", label: "Finance", color: "rgba(34,197,94,0.12)", border: "rgba(34,197,94,0.2)" },
                   { emoji: "📜", label: "Sanskrit", color: "rgba(139,92,246,0.12)", border: "rgba(139,92,246,0.2)" },

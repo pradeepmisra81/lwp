@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import SkeletonPage from "@/components/SkeletonPage/SkeletonPage";
+import SubjectPageContent from "@/components/Subjects/SubjectPageContent";
+import { YOUTUBE_CHANNELS } from "@/config/constants";
 
 export const metadata: Metadata = {
   title: "Sanskrit | LWP",
@@ -42,12 +43,19 @@ const sections = [
 
 export default function SanskritPage() {
   return (
-    <SkeletonPage
+    <SubjectPageContent
       emoji="📜"
       title="Sanskrit"
       subtitle="Explore the mother of languages — from ancient shlokas and Vedic literature to grammar and conversational Sanskrit. Preserving and sharing our rich cultural heritage."
       accentColor="linear-gradient(135deg, #8b5cf6, #6d28d9)"
+      glowColor="rgba(139, 92, 246, 0.12)"
+      borderColor="rgba(139, 92, 246, 0.2)"
+      borderHex="#8b5cf6"
       sections={sections}
+      keywords={["sanskrit", "संस्कृत", "shloka"]}
+      channelUrl={YOUTUBE_CHANNELS.main.url}
+      subjectLabel="Sanskrit"
+      subjectKey="sanskrit"
     />
   );
 }
