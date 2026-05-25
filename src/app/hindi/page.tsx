@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import SkeletonPage from "@/components/SkeletonPage/SkeletonPage";
+import SubjectPageContent from "@/components/Subjects/SubjectPageContent";
+import { YOUTUBE_CHANNELS } from "@/config/constants";
 
 export const metadata: Metadata = {
   title: "Hindi | LWP",
@@ -42,12 +43,19 @@ const sections = [
 
 export default function HindiPage() {
   return (
-    <SkeletonPage
+    <SubjectPageContent
       emoji="✍️"
       title="Hindi"
       subtitle="Dive into the richness of Hindi language — from timeless poetry and literature to modern language arts. Celebrating the beauty of our national language."
       accentColor="linear-gradient(135deg, #3b82f6, #1d4ed8)"
+      glowColor="rgba(59, 130, 246, 0.12)"
+      borderColor="rgba(59, 130, 246, 0.2)"
+      borderHex="#3b82f6"
       sections={sections}
+      keywords={["hindi", "हिंदी", "kavita"]}
+      channelUrl={YOUTUBE_CHANNELS.main.url}
+      subjectLabel="Hindi"
+      subjectKey="hindi"
     />
   );
 }

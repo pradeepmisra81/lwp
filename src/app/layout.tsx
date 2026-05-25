@@ -14,13 +14,18 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "LWP | EdTech Platform Powered by Aprasak",
   description:
-    "India's fastest-growing EdTech platform. Explore world-class educational content in Mathematics, Finance, Sanskrit, and Hindi. Powered by Aprasak — empowering learners through high-quality content.",
+    "India's fastest-growing EdTech platform. Explore world-class educational content in Technology, Software Development, AI & ML, Blockchain, Mathematics, Finance, Sanskrit, and Hindi. Powered by Aprasak — empowering learners through high-quality content.",
   keywords: [
     "LWP",
-
     "Learning With PKM",
     "Aprasak",
     "EdTech",
+    "Technology",
+    "Software Development",
+    "AI & ML",
+    "AI",
+    "ML",
+    "Blockchain",
     "Mathematics",
     "Ganit",
     "Finance",
@@ -32,7 +37,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "LWP | EdTech Platform Powered by Aprasak",
     description:
-      "India's fastest-growing EdTech platform. World-class content in Mathematics, Finance, Sanskrit, and Hindi.",
+      "India's fastest-growing EdTech platform. World-class content in Technology, Software Development, AI & ML, Blockchain, Mathematics, Finance, Sanskrit, and Hindi.",
     type: "website",
     url: "https://www.youtube.com/@learningwithpkm-vihang",
   },

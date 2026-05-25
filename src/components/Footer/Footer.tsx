@@ -13,7 +13,9 @@ export default function Footer() {
           {/* Brand */}
           <div className="max-w-[400px]">
             <div className="flex items-center gap-3 mb-5">
-              <span className="flex items-center justify-center w-10 h-10 bg-gradient-to-br from-primary-500 via-primary-600 to-accent-600 rounded-xl text-[13px] shadow-[0_0_24px_rgba(249,115,22,0.3)]">▶</span>
+              <span className="flex items-center justify-center w-10 h-10 rounded-xl overflow-hidden shadow-[0_0_24px_rgba(249,115,22,0.3)]">
+                <img src="/logo.png" alt="LWP Logo" className="w-full h-full object-cover" />
+              </span>
               <div className="flex flex-col">
                 <span className="text-xl font-extrabold text-text-primary tracking-[-0.03em]">
                   LWP
@@ -25,7 +27,7 @@ export default function Footer() {
             </div>
             <p className="text-sm text-text-muted leading-[1.8] mb-4">
               India&apos;s premier EdTech platform delivering world-class educational
-              content in Mathematics, Finance, Sanskrit, Hindi, and beyond. Built on
+              content in Technology, Software Development, AI & ML, Blockchain, Mathematics, Finance, Sanskrit, Hindi, and beyond. Built on
               Aprasak technology.
             </p>
             <span className="aprasak-badge">

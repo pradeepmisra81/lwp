@@ -65,9 +65,8 @@ export default function Navbar() {
       <nav className="max-w-[1280px] mx-auto px-4 sm:px-6 flex items-center justify-between h-[72px] gap-4">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-3 no-underline shrink-0 group">
-          <span className="relative flex items-center justify-center w-10 h-10 bg-gradient-to-br from-primary-500 via-primary-600 to-accent-600 rounded-xl text-[14px] shadow-[0_0_24px_rgba(249,115,22,0.35)] transition-all duration-300 group-hover:shadow-[0_0_32px_rgba(249,115,22,0.5)] group-hover:scale-110">
-            <span className="relative z-10">▶</span>
-            <span className="absolute inset-0 rounded-xl bg-gradient-to-br from-primary-400 to-accent-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+          <span className="relative flex items-center justify-center w-10 h-10 rounded-xl overflow-hidden shadow-[0_0_24px_rgba(249,115,22,0.35)] transition-all duration-300 group-hover:shadow-[0_0_32px_rgba(249,115,22,0.5)] group-hover:scale-110">
+            <img src="/logo.png" alt="LWP Logo" className="w-full h-full object-cover" />
           </span>
           <div className="flex flex-col">
             <span className="text-lg sm:text-xl font-extrabold text-text-primary tracking-[-0.03em] leading-tight">

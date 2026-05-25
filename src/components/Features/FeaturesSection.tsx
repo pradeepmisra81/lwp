@@ -12,7 +12,7 @@ const features = [
   {
     icon: "🌐",
     title: "Multi-Disciplinary",
-    description: "From Vedic Mathematics to Stock Markets — explore content across 4+ subjects and growing.",
+    description: "From Technology to Sanskrit — explore content across 8+ subjects and growing.",
     gradient: "from-accent-500 to-accent-600",
   },
   {

@@ -14,10 +14,10 @@ export async function GET() {
     const xmlText = await res.text();
     
     // Simple regex parsing for the RSS feed to avoid heavy XML parsers
-    const videos = [];
     const entryRegex = /<entry>([\s\S]*?)<\/entry>/g;
     let match;
     
+    const tempVideos = [];
     while ((match = entryRegex.exec(xmlText)) !== null) {
       const entryText = match[1];
       
@@ -34,19 +34,40 @@ export async function GET() {
         const publishedAt = pubDateMatch ? pubDateMatch[1] : new Date().toISOString();
         const description = mediaDescMatch ? mediaDescMatch[1].trim().substring(0, 150) + '...' : '';
         
-        const isShort = link.includes("/shorts/");
-        
-        videos.push({
+        tempVideos.push({
           id,
           title,
           link,
           thumbnail: `https://i.ytimg.com/vi/${id}/mqdefault.jpg`,
           publishedAt,
           description,
-          isShort,
         });
       }
     }
+
+    const videos = await Promise.all(
+      tempVideos.map(async (v) => {
+        let isShort = v.title.toLowerCase().includes("#shorts");
+        if (!isShort) {
+          try {
+            const checkRes = await fetch(`https://www.youtube.com/shorts/${v.id}`, {
+              method: "HEAD",
+              redirect: "manual",
+              next: { revalidate: 86400 } // Cache results for 24 hours
+            });
+            if (checkRes.status === 200) {
+              isShort = true;
+            }
+          } catch {
+            // ignore error
+          }
+        }
+        return {
+          ...v,
+          isShort,
+        };
+      })
+    );
     
     // Separate into videos and shorts
     const regularVideos = videos.filter(v => !v.isShort);

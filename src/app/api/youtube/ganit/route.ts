@@ -16,10 +16,10 @@ export async function GET() {
 
     const xmlText = await res.text();
 
-    const videos = [];
     const entryRegex = /<entry>([\s\S]*?)<\/entry>/g;
     let match;
 
+    const tempVideos = [];
     while ((match = entryRegex.exec(xmlText)) !== null) {
       const entryText = match[1];
 
@@ -45,19 +45,40 @@ export async function GET() {
           ? mediaDescMatch[1].trim().substring(0, 150) + "..."
           : "";
 
-        const isShort = link.includes("/shorts/");
-
-        videos.push({
+        tempVideos.push({
           id,
           title,
           link,
           thumbnail: `https://i.ytimg.com/vi/${id}/mqdefault.jpg`,
           publishedAt,
           description,
-          isShort,
         });
       }
     }
+
+    const videos = await Promise.all(
+      tempVideos.map(async (v) => {
+        let isShort = v.title.toLowerCase().includes("#shorts");
+        if (!isShort) {
+          try {
+            const checkRes = await fetch(`https://www.youtube.com/shorts/${v.id}`, {
+              method: "HEAD",
+              redirect: "manual",
+              next: { revalidate: 86400 } // Cache results for 24 hours
+            });
+            if (checkRes.status === 200) {
+              isShort = true;
+            }
+          } catch {
+            // ignore error
+          }
+        }
+        return {
+          ...v,
+          isShort,
+        };
+      })
+    );
 
     const regularVideos = videos.filter((v) => !v.isShort);
     const shorts = videos.filter((v) => v.isShort);

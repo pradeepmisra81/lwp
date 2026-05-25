@@ -1,6 +1,6 @@
 export const SITE_CONFIG = {
   name: "LWP",
-  description: "India's fastest-growing EdTech platform. Explore world-class educational content in Mathematics, Finance, Sanskrit, and Hindi.",
+  description: "India's fastest-growing EdTech platform. Explore world-class educational content in Technology, Software Development, AI & ML, Blockchain, Mathematics, Finance, Sanskrit, and Hindi.",
   url: "https://lwp-vihang.vercel.app", // Placeholder if not deployed yet
 };
 
